@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Weather-app</title>
+  </head>
+  <body>
+    <div style="padding: 50px 20px 50px 20px; background-color:darkcyan; color: whitesmoke;">
+    <h1 style="text-align: center;">What's the weather like ?</h1>
+    </div>
+    <div class="container " style="padding: 25px 20px 25px 20px;" >
+        <div class="row">
+          <div class=".col-lg-4" style="padding:10px 10px 10px 10px;">
+            <form method="post">
+                {% csrf_token %}
+                <div class="field has-addons">
+                    <div class="control is-expanded" style="color: darkcyan; background-color: #fafaff; font-size: 25px;">
+                        {{ form.name }}
+                    </div>
+                    <div class="control" style="padding:10px 10px 10px 0px;">
+                        <button type="submit" class="button is-info" style="background-color: darkcyan;  color: white; font-size: 20px;">
+                            Add City
+                        </button>
+                    </div>
+                </div>
+                {% if message %}
+                    <div class="notification {{ message_class }}">{{ message }}</div>
+                {% endif %}
+            </form>
+          </div>
+          <div class=".col-lg-4">
+<!--              {% for city_weather in weather_data %}-->
+            <div class="card" style="width: 28rem; align-items: center; margin: 10px 10px 10px 10px;">
+                <div class="card-body">
+<!--                    <figure class="image is-50x50">-->
+<!--                        <img src="htttp://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">-->
+<!--                    </figure>-->
+                  <h5 class="card-title">{{ city_weather.city }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ city_weather.temperature }} F</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">Country: {{ city_weather.country }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Humidity: {{ city_weather.humidity }}</h6>
+                  <h4 class="card-text">{{ city_weather.description }}</h4>
+                </div>
+                <div class="media-left">
+                    <a href="{% url 'delete_city' city_weather.city %}">
+                        <button class="delete" style="margin:8px 8px 10px 8px;"><b>X</b></button>
+                    </a>
+                </div>
+              </div>
+<!--              {% endfor %}-->
+          </div>
+
+<!--          <div class=".col-lg-4">-->
+<!--            <h5  style="text-align: justify; color: teal;">This Weather webapp allow you to see current temperature of city.</h5>-->
+<!--          </div>-->
+      </div>
+    </div>
+    <div style="padding: 50px 20px 50px 20px; background-color:darkcyan; color: whitesmoke;">
+    <h5 style="text-align: center;">This Weather webapp allow you to see current temperature of city.</h5>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
+
